@@ -1,0 +1,7 @@
+@use "../../styles/variables" as v;
+
+.navbar{
+    background-color: v.$color4;
+    border-bottom: 0.1rem solid v.$color3;
+
+}
