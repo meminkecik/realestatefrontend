@@ -6,6 +6,11 @@ import AdvertiseEstatePage from "../pages/advertise-estate-page";
 import ContactPage from "../pages/contact-page";
 import AboutPage from "../pages/about-page";
 import LoginPage from "../pages/login-page";
+import RegisterPage from "../pages/register-page";
+import PrivateRoute from "./private-route";
+import { config } from "../helpers/config";
+import Error403Page from "../pages/errors/error-403-page";
+import Error404Page from "../pages/errors/error-404-page";
 
 const router = createBrowserRouter([
     {
@@ -18,11 +23,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "featured",
-                element: <FeaturedPage />
+                element: <PrivateRoute roles={config.pageRoles.featured}><FeaturedPage /></PrivateRoute>
             },
             {
                 path: "advertise-estate",
-                element: <AdvertiseEstatePage />
+                element: <PrivateRoute roles={config.pageRoles.advertiseEstate}><AdvertiseEstatePage /></PrivateRoute>
             },
             {
                 path: "contact",
@@ -36,6 +41,18 @@ const router = createBrowserRouter([
                 path: "login",
                 element: <LoginPage />
             },
+            {
+                path: "register",
+                element: <RegisterPage />
+            },
+            {
+                path: "unauthorized",
+                element: <Error403Page />
+            },
+            {
+                path: "*",
+                element: <Error404Page />
+            }
         ]
     }
 ]);

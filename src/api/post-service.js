@@ -4,8 +4,8 @@ import { getAuthHeader } from "../helpers/auth-header";
 
 const API_URL = config.api.baseUrl; 
 
-export const getAllEstateByPage = async (page=0, size=10, sort="city", type="desc", estateType, minPrice, maxPrice, roomNumber, city) => {
-    const resp = await axios.get(`${API_URL}/estate/getAllPost?page=${page}&size=${size}&sort=${sort}&type=${type}&estateType=${estateType}&minPrice=${minPrice}&maxPrice=${maxPrice}&roomNumber=${roomNumber}&city=${city}`, {
+export const getAllEstateByPage = async (page=0, size=10, sort="city", type="desc") => {
+    const resp = await axios.get(`${API_URL}/estate/getAllPost?page=${page}&size=${size}&sort=${sort}&type=${type}`, {
         headers: getAuthHeader()
     });
     const data = resp.data;

@@ -1,13 +1,14 @@
 @use "../../styles/variables" as v;
 
-.card {
+
+.maincard {
   display: flex;
-  flex-wrap: wrap;
   border: 0.1rem solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   background: #fff;
   flex: 1 1 30rem;
+  margin: 10px;
   .overlay {
     pointer-events: none;
   }

@@ -1,0 +1,23 @@
+{
+    "USER" : [
+        { "title": "Home", "link": "/"},
+        { "title": "Featured", "link": "/featured"},
+        { "title": "About", "link": "/about"},
+        { "title": "Contact", "link": "/contact"}
+        
+    ],
+    "ADMIN" : [
+        { "title": "Home", "link": "/"},
+        { "title": "Featured", "link": "/featured"},
+        { "title": "Advertise Estate", "link": "/advertise-estate"},
+        { "title": "About", "link": "/about"},
+        { "title": "Contact", "link": "/contact"}
+    ],
+    "REAL_ESTATE" : [
+        { "title": "Home", "link": "/"},
+        { "title": "Featured", "link": "/featured"},
+        { "title": "Advertise Estate", "link": "/advertise-estate"},
+        { "title": "About", "link": "/about"},
+        { "title": "Contact", "link": "/contact"}
+    ]
+}

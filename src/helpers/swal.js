@@ -6,6 +6,7 @@ export const swalAlert = (title, icon = "info", text = "") => {
     title,
     text,
     icon,
+    confirmButtonColor: "rgb(7, 84, 112)",
   });
 };
 
@@ -13,7 +14,7 @@ export const swalConfirm = (
   title,
   icon = "question",
   text = "",
-  confirmButtonText = "Yes"
+  confirmButtonText = "Yes",
 ) => {
   return Swal.fire({
     title,
@@ -21,5 +22,6 @@ export const swalConfirm = (
     icon,
     showCancelButton: true,
     confirmButtonText,
+    confirmButtonColor: "rgb(7, 84, 112)",
   });
 };

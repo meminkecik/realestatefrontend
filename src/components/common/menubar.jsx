@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Container,
   Image,
   Navbar,
@@ -10,8 +9,10 @@ import { config } from "../../helpers/config";
 import { Link } from "react-router-dom";
 import MainMenu from "./main-menu";
 import "./menubar.scss";
+import UserMenu from "./user-menu";
 
 const Menubar = () => {
+  
   return (
     <Navbar className="navbar" expand="lg" sticky="top">
       <Container>
@@ -35,13 +36,7 @@ const Menubar = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <MainMenu className="justify-content-center flex-grow-1 pe-3" />
-            <Button
-              as={Link}
-              to={"/login"}
-              className="btn btn-outline-secondary"
-            >
-              Login
-            </Button>
+            <UserMenu />
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

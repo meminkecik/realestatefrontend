@@ -2,7 +2,6 @@
 @import "./_variables";
 @import "bootstrap/scss/bootstrap";
 
-
 body{
     color: $color6;
     
@@ -10,4 +9,6 @@ body{
 .nav-link {
     color: $color3;
   }
-
+a{
+    text-decoration: none;
+}

@@ -6,9 +6,14 @@ import ButtonSpinner from "../common/button-spinner";
 import PasswordInput from "../common/password-input";
 import { swalAlert } from "../../helpers/swal";
 import { login } from "../../api/auth-service";
-import { getLocalStorage, setLocalStorage } from "../../helpers/encrypted-storage";
+import {  setLocalStorage } from "../../helpers/encrypted-storage";
+import { useDispatch } from "react-redux";
+import {login as loginSuccess} from "../../store/slices/auth-slice"
+import { Link, useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -24,10 +29,12 @@ const LoginForm = () => {
         const user = await login(values);
         const {token} = user;
         setLocalStorage("token", token);
+        dispatch(loginSuccess(user));
+        navigate("/featured")
         formik.resetForm();
-        swalAlert("Login Successful","success")
+        
     } catch (err) {
-        const errMsg = Object.values(err.response.data.validations)[0];
+        const errMsg = err.response.data.message;
         swalAlert(errMsg,"error");
     }
     finally{
@@ -77,7 +84,7 @@ const LoginForm = () => {
                   >
                     {loading && <ButtonSpinner />} Login
                   </Button>
-                  
+                  <Link className="mt-3" to={"/register"}>Don't you have an account?</Link>
                 </Form.Group>
               </Form>
             </Card.Body>
