@@ -12,7 +12,7 @@ const EstateCard = () => {
   const [loading, setLoading] = useState(true);
   const [lazyState, setLazyState] = useState({
     first: 0,
-    rows: 5,
+    rows: 10,
     page: 0,
 
   });
