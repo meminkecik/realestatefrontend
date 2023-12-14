@@ -1,8 +1,13 @@
 import React from 'react'
+import NewEstateForm from '../components/advertise-estate/new-estate-form'
+import Spacer from '../components/common/spacer'
 
 const AdvertiseEstatePage = () => {
   return (
-    <div>AdvertiseEstatePage</div>
+    <>
+      <Spacer />
+      <NewEstateForm />
+    </>
   )
 }
 

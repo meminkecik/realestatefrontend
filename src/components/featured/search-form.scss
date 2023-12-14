@@ -1,0 +1,32 @@
+@use "../../styles/variables" as v;
+
+.search-form {
+    display: flex;
+    justify-content:space-evenly;
+    background-color: v.$color4;
+    border: 1px solid v.$color3; // Border rengi ve kalınlığı
+    margin: 10px; // Otomatik ortalamak için
+    border-radius: 5cqb; // Kenarları yuvarlama
+    padding-bottom: 0rem;
+    padding-right: 0;
+    width: 1000px !important;
+
+  
+    .navbar {
+        background-color: v.$color4;
+        border: none;
+        border-radius: 40px;
+    }
+  
+    .col{
+        width: fit-content;
+    }
+  
+    
+    .InputGroup{
+        padding: 0;
+    }
+    .form-control {
+        flex: 1; // Öğeleri eşit genişlikte paylaş
+      }
+  }

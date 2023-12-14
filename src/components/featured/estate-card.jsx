@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardText, Col, Container, Row } from "react-bootstrap";
+import { Card, CardText, Container } from "react-bootstrap";
 import { FaExpand, FaBed, FaPhone } from "react-icons/fa";
 import "./estate-card.scss";
 import { getAllEstateByPage } from "../../api/post-service";
 import { DataView } from "primereact/dataview";
 import 'primeflex/primeflex.css';
 
-const EstateCard = () => {
+const EstateCard = ({searchData}) => {
   const [list, setList] = useState([]);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,14 @@ const EstateCard = () => {
   };
   const loadData = async () => {
     try {
-      const resp = await getAllEstateByPage(lazyState.page, lazyState.rows);
+      const resp = await getAllEstateByPage({
+        page: lazyState.page,
+        size: lazyState.rows,
+        sort: 'city',
+        type: 'desc',
+        searchData: searchData,
+      });
+      console.log(resp.content)
       setList(resp.content);
       setTotalRecords(resp.totalElements);
     } catch (error) {
@@ -32,7 +39,8 @@ const EstateCard = () => {
   };
   useEffect(() => {
     loadData();
-  }, [lazyState]);
+  }, [searchData]);
+
 const itemTemplate = (product) => {
     return (
 
@@ -58,7 +66,7 @@ const itemTemplate = (product) => {
         </Card.Body>
         <Card.Body className="card-body2">
           <CardText>{product.header}</CardText>
-          <CardText>{product.address}</CardText>
+          <CardText>{product.address}/{product.city}</CardText>
         </Card.Body>
         <Card.Body className="card-body3">
           <CardText>

@@ -1,8 +1,13 @@
 import React from 'react'
+import Spacer from '../components/common/spacer'
+import About from '../components/about/about'
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
+    <>
+      <Spacer height={100} />
+      <About />
+    </>
   )
 }
 
