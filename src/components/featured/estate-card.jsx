@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardText, Col, Container, Row } from "react-bootstrap";
+import { Card, CardText, Container } from "react-bootstrap";
 import { FaExpand, FaBed, FaPhone } from "react-icons/fa";
 import "./estate-card.scss";
 import { getAllEstateByPage } from "../../api/post-service";
 import { DataView } from "primereact/dataview";
 import 'primeflex/primeflex.css';
+import {refreshToken} from "../../store/slices/misc-slice";
+import {  useDispatch, useSelector } from "react-redux";
 
-const EstateCard = () => {
+const EstateCard = ({searchData}) => {
+  const {listRefreshToken} = useSelector((state) => state.misc);
   const [list, setList] = useState([]);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const [lazyState, setLazyState] = useState({
     first: 0,
     rows: 10,
@@ -21,7 +25,13 @@ const EstateCard = () => {
   };
   const loadData = async () => {
     try {
-      const resp = await getAllEstateByPage(lazyState.page, lazyState.rows);
+      const resp = await getAllEstateByPage({
+        page: lazyState.page,
+        size: lazyState.rows,
+        sort: 'city',
+        type: 'desc',
+        searchData: searchData,
+      });
       setList(resp.content);
       setTotalRecords(resp.totalElements);
     } catch (error) {
@@ -32,7 +42,8 @@ const EstateCard = () => {
   };
   useEffect(() => {
     loadData();
-  }, [lazyState]);
+  }, [searchData]);
+
 const itemTemplate = (product) => {
     return (
 

@@ -4,13 +4,22 @@ import { getAuthHeader } from "../helpers/auth-header";
 
 const API_URL = config.api.baseUrl; 
 
-export const getAllEstateByPage = async (page=0, size=10, sort="city", type="desc") => {
-    const resp = await axios.get(`${API_URL}/estate/getAllPost?page=${page}&size=${size}&sort=${sort}&type=${type}`, {
-        headers: getAuthHeader()
+export const getAllEstateByPage = async ({ page = 0, size = 10, sort = "city", type = "desc", searchData }) => {
+    const queryParams = new URLSearchParams({
+      page,
+      size,
+      sort,
+      type,
+      ...searchData, 
     });
+  
+    const resp = await axios.get(`${API_URL}/estate/getAllPost?${queryParams}`, {
+      headers: getAuthHeader(),
+    });
+  
     const data = resp.data;
     return data;
-}
+  };
 
 export const saveEstate = async (payload) => {
     const resp = await axios.post(`${API_URL}/estate/saveEstate`, payload, {
