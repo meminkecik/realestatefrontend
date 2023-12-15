@@ -5,11 +5,18 @@ import "./estate-card.scss";
 import { getAllEstateByPage } from "../../api/post-service";
 import { DataView } from "primereact/dataview";
 import 'primeflex/primeflex.css';
+import {refreshToken} from "../../store/slices/misc-slice";
+import {  useDispatch, useSelector } from "react-redux";
 
 const EstateCard = ({searchData}) => {
+<<<<<<< HEAD
+=======
+  const {listRefreshToken} = useSelector((state) => state.misc);
+>>>>>>> cb9a00cde6abe90a38924fa7772bd2cc18b8d501
   const [list, setList] = useState([]);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const [lazyState, setLazyState] = useState({
     first: 0,
     rows: 10,
@@ -28,7 +35,10 @@ const EstateCard = ({searchData}) => {
         type: 'desc',
         searchData: searchData,
       });
+<<<<<<< HEAD
       console.log(resp.content)
+=======
+>>>>>>> cb9a00cde6abe90a38924fa7772bd2cc18b8d501
       setList(resp.content);
       setTotalRecords(resp.totalElements);
     } catch (error) {
