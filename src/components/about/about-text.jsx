@@ -1,25 +1,16 @@
-import React from 'react';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
-import "./about.scss";
+import React from 'react'
+import { Card, Col, Container, Row } from 'react-bootstrap'
+import "./about-text.scss"
 
-const About = () => {
+const AboutText = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col xs={12} md={6} className="mb-4">
-          <Image src="/images/about/resim1.jpg" fluid />
-        </Col>
-        <Col xs={12} md={6} className="mb-4">
-          <Image src="/images/about/img2.jpg" fluid />
-        </Col>
-        <Col xs={12} md={6} className="mb-4">
-          <Image src="/images/about/img3.jpg" fluid />
-        </Col>
-        <Col xs={12} md={6} className="mb-4">
-          <Card>
+        <Col className="mb-4">
+          <Card className='card-about border-none'>
             <Card.Body>
-              <Card.Title className="text-center mb-4 fs-3">Welcome!</Card.Title>
-              <Card.Text className="text-center mb-4 fs-4">
+              <Card.Title className="text-center mb-4 fs-1">Welcome!</Card.Title>
+              <Card.Text className="carte text-center mb-4 fs-4">
                 As a Real Estate Company, we offer you the opportunity to become a homeowner in a place
                 you can trust and find happiness. Putting customer satisfaction at the forefront, we assist
                 you in finding the home of your dreams.
@@ -38,7 +29,7 @@ const About = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default About;
+export default AboutText

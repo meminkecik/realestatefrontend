@@ -1,0 +1,12 @@
+@use "../../styles/variables" as v;
+
+
+.card-about{
+
+        color: v.$color4 !important;
+        background: transparent !important;
+    .carte{
+        background:none !important;
+        color: v.$color4 !important;
+    }
+}

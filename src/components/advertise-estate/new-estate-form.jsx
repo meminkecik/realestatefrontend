@@ -16,12 +16,12 @@ import ButtonSpinner from "../common/button-spinner";
 import { setOperation } from "../../store/slices/misc-slice";
 import { swalAlert } from "../../helpers/swal";
 import { useNavigate } from "react-router-dom";
+import ImageUploader from "./image-uploader";
 
 const NewEstateForm = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const initialValues = {
     estateType: "",
@@ -36,24 +36,27 @@ const NewEstateForm = () => {
     city: "",
     address: "",
     ownerSsn: "",
+    imageUrl: "",
   };
 
   const validationSchema = Yup.object({
+    imageUrl: Yup.mixed().required("Required"),
     estateType: Yup.string()
       .required("Required")
       .oneOf(["SALE", "RENT"], "Invalid Type"),
     price: Yup.string().required("Required"),
-    header: Yup.string()
-      .required("Required"),
+    header: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     squareMeter: Yup.string().required("Required"),
-    roomNumber: Yup.string()
-      .required("Required"),
-    totalFloor: Yup.string()
-      .required("Required"),
+    roomNumber: Yup.string().required("Required"),
+    totalFloor: Yup.string().required("Required"),
     floor: Yup.string().required("Required"),
-    typeOfHeating: Yup.string().required("Required").oneOf(["Biofuel", "Central System","Solar","Natural Gas"], "Invalid Type")
-    ,
+    typeOfHeating: Yup.string()
+      .required("Required")
+      .oneOf(
+        ["BioFuel", "Central System", "Solar", "Natural Gas"],
+        "Invalid Type"
+      ),
     city: Yup.string().required("Required"),
     address: Yup.string().required("Required"),
     ownerSsn: Yup.string().required("Required"),
@@ -68,7 +71,7 @@ const NewEstateForm = () => {
       swalAlert("Estate was created", "success");
       setTimeout(() => {
         navigate("/featured");
-    }, 3000);
+      }, 3000);
       navigate("/featured");
     } catch (err) {
       const msg = Object.values(err.response.data.validations)[0];
@@ -94,8 +97,19 @@ const NewEstateForm = () => {
         <Card.Body>
           <Card.Title className="text-center mb-3 fs-4">New Estate</Card.Title>
           <Form noValidate onSubmit={formik.handleSubmit}>
+            <Row className="mb-3 border-bottom">
+              <Col>
+                <FloatingLabel controlId="imageUrl" className="mb-3">
+                  <p className="fs-5">Image Upload</p>
+                  <ImageUploader
+                  setFieldValue={formik.setFieldValue}
+                  />
+
+                </FloatingLabel>
+              </Col>
+            </Row>
             <Row xs={1} sm={2} md={3} lg={4} className="g-3">
-            <Col>
+              <Col>
                 <FloatingLabel
                   controlId="estateType"
                   label="Estate Type"
@@ -104,7 +118,9 @@ const NewEstateForm = () => {
                   <Form.Select
                     aria-label="Select Estate Type"
                     {...formik.getFieldProps("estateType")}
-                    isInvalid={formik.touched.estateType && formik.errors.estateType}
+                    isInvalid={
+                      formik.touched.estateType && formik.errors.estateType
+                    }
                   >
                     <option>Select Estate Type</option>
                     <option value="SALE">For SALE</option>
@@ -117,11 +133,7 @@ const NewEstateForm = () => {
                 </FloatingLabel>
               </Col>
               <Col>
-                <FloatingLabel
-                  controlId="price"
-                  label="Price"
-                  className="mb-3"
-                >
+                <FloatingLabel controlId="price" label="Price" className="mb-3">
                   <Form.Control
                     type="text"
                     placeholder="price"
@@ -189,18 +201,12 @@ const NewEstateForm = () => {
                 </FloatingLabel>
               </Col>
               <Col>
-                <FloatingLabel
-                  controlId="floor"
-                  label="Floor"
-                  className="mb-3"
-                >
+                <FloatingLabel controlId="floor" label="Floor" className="mb-3">
                   <Form.Control
                     type="text"
                     placeholder="Floor"
                     {...formik.getFieldProps("floor")}
-                    isInvalid={
-                      formik.touched.floor && formik.errors.floor
-                    }
+                    isInvalid={formik.touched.floor && formik.errors.floor}
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.floor}
@@ -236,7 +242,10 @@ const NewEstateForm = () => {
                   <Form.Select
                     aria-label="Select Type Of Heating"
                     {...formik.getFieldProps("typeOfHeating")}
-                    isInvalid={formik.touched.typeOfHeating && formik.errors.typeOfHeating}
+                    isInvalid={
+                      formik.touched.typeOfHeating &&
+                      formik.errors.typeOfHeating
+                    }
                   >
                     <option>Select Type Of Heating</option>
                     <option value="Natural Gas">Natural Gas</option>
@@ -252,18 +261,12 @@ const NewEstateForm = () => {
               </Col>
 
               <Col>
-                <FloatingLabel
-                  controlId="city"
-                  label="City"
-                  className="mb-3"
-                >
+                <FloatingLabel controlId="city" label="City" className="mb-3">
                   <Form.Control
                     type="text"
                     placeholder="city"
                     {...formik.getFieldProps("city")}
-                    isInvalid={
-                      formik.touched.city && formik.errors.city
-                    }
+                    isInvalid={formik.touched.city && formik.errors.city}
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.city}
@@ -281,9 +284,7 @@ const NewEstateForm = () => {
                     type="text"
                     placeholder="address"
                     {...formik.getFieldProps("address")}
-                    isInvalid={
-                      formik.touched.address && formik.errors.address
-                    }
+                    isInvalid={formik.touched.address && formik.errors.address}
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.address}
@@ -321,8 +322,7 @@ const NewEstateForm = () => {
                     placeholder="description"
                     {...formik.getFieldProps("description")}
                     isInvalid={
-                      formik.touched.description &&
-                      formik.errors.description
+                      formik.touched.description && formik.errors.description
                     }
                   />
                   <Form.Control.Feedback type="invalid">

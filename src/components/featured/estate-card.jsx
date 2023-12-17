@@ -5,17 +5,14 @@ import "./estate-card.scss";
 import { getAllEstateByPage } from "../../api/post-service";
 import { DataView } from "primereact/dataview";
 import 'primeflex/primeflex.css';
-import {refreshToken} from "../../store/slices/misc-slice";
-import {  useDispatch, useSelector } from "react-redux";
 
 const EstateCard = ({searchData}) => {
   const [list, setList] = useState([]);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
   const [lazyState, setLazyState] = useState({
     first: 0,
-    rows: 10,
+    rows: 9,
     page: 0,
 
   });
@@ -41,7 +38,7 @@ const EstateCard = ({searchData}) => {
   };
   useEffect(() => {
     loadData();
-  }, [searchData]);
+  }, [searchData,lazyState]);
 
 const itemTemplate = (product) => {
     return (
@@ -50,9 +47,10 @@ const itemTemplate = (product) => {
       <div className="top-img">
           <Card.Img
             className="img"
-            src="/images/apartment1.jpg"
+            src={product.imageUrl}
             alt="Card image"
-
+            width={322}
+            height={240}
           />
         </div>
         <Card.ImgOverlay className="overlay">
@@ -90,9 +88,9 @@ const itemTemplate = (product) => {
         <DataView
         value={list}
         lazy
-        dataKey="id"
+        dataKey={() => Math.random()}
         itemTemplate={itemTemplate}
-        paginator = {true}
+        paginator
         first={lazyState.first}
         loading={loading}
         totalRecords={totalRecords}

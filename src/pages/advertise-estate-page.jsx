@@ -7,6 +7,7 @@ const AdvertiseEstatePage = () => {
     <>
       <Spacer />
       <NewEstateForm />
+      <Spacer />
     </>
   )
 }

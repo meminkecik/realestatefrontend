@@ -1,0 +1,5 @@
+@use "../../styles/variables" as v;
+
+.card-about-main{
+    background: linear-gradient(0.25turn,v.$color4, v.$color3);
+}
